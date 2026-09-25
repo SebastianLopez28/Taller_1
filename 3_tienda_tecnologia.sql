@@ -1,0 +1,36 @@
+-- =========================================================
+-- 3. GESTION TIENDA DE TECNOLOGIA - Normalizado a 3FN
+-- =========================================================
+CREATE DATABASE IF NOT EXISTS tienda_tecnologia;
+USE tienda_tecnologia;
+
+CREATE TABLE CLIENTES (
+    ID_CLIENTE     INT PRIMARY KEY,
+    CUSTOMER_NAME  VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE PRODUCTOS (
+    ID_PRODUCTO    INT PRIMARY KEY AUTO_INCREMENT,
+    PRODUCT_NAME   VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE COMPRAS (
+    ID_CLIENTE   INT NOT NULL,
+    ID_PRODUCTO  INT NOT NULL,
+    PRIMARY KEY (ID_CLIENTE, ID_PRODUCTO),
+    FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTES(ID_CLIENTE),
+    FOREIGN KEY (ID_PRODUCTO) REFERENCES PRODUCTOS(ID_PRODUCTO)
+);
+
+INSERT INTO CLIENTES VALUES
+(101,'John Doe'),
+(102,'Jane Smith'),
+(103,'Alice Brown');
+
+INSERT INTO PRODUCTOS (PRODUCT_NAME) VALUES
+('Laptop'),('Mouse'),('Tablet'),('Keyboard'),('Monitor'),('Pen');
+
+INSERT INTO COMPRAS VALUES
+(101,1),(101,2),
+(102,3),
+(103,4),(103,5),(103,6);
